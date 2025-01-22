@@ -26,13 +26,13 @@ interface EventService {
     @GET("event")
     suspend fun getAllEvent(): AllEventResponse
 
-    @GET("{event/:id_event}")
+    @GET("event/{id_event}")
     suspend fun getEventbyidEvent(@Path("id_event") id_event: Int): EventDetailResponse
 
-    @PUT("{id_event}")
+    @PUT("event/{id_event}")
     suspend fun updateEvent(@Path("id_event") id_event: Int, @Body event: Event)
 
-    @DELETE("{id_event}")
+    @DELETE("event/{id_event}")
     suspend fun deleteEvent(@Path("id_event") id_event: Int): Response<Void>
 
 }
