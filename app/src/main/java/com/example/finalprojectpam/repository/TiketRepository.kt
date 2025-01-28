@@ -14,6 +14,7 @@ interface TiketRepository {
     suspend fun updateTiket(id_tiket: Int, tiket: Tiket)
     suspend fun deleteTiket(id_tiket: Int)
     suspend fun getTiketbyidTiket(id_tiket: Int): Tiket
+    suspend fun getAllTikets():List<Tiket>
 }
 
 class NetworkTiketRepository(
@@ -51,4 +52,10 @@ class NetworkTiketRepository(
     override suspend fun getTiketbyidTiket(id_tiket: Int): Tiket {
         return tiketApiService.getTiketbyidTiket(id_tiket).data
     }
+
+    override suspend fun getAllTikets(): List<Tiket> {
+        return tiketApiService.getAllTiket().data
+    }
+
+
 }

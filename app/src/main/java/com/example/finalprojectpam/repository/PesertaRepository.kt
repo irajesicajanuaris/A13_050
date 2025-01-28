@@ -11,6 +11,7 @@ interface PesertaRepository {
     suspend fun updatePeserta(id_peserta: Int, peserta: Peserta)
     suspend fun deletePeserta(id_peserta: Int)
     suspend fun getPesertabyidPeserta(id_peserta: Int): Peserta
+    suspend fun getAllPesertas(): List<Peserta>
 }
 
 class NetworkPesertaRepository(
@@ -47,4 +48,9 @@ class NetworkPesertaRepository(
     override suspend fun getPesertabyidPeserta(id_peserta: Int): Peserta {
         return pesertaApiService.getPesertabyidPeserta(id_peserta).data
     }
+
+    override suspend fun getAllPesertas(): List<Peserta> {
+        return pesertaApiService.getAllPeserta().data
+    }
+
 }

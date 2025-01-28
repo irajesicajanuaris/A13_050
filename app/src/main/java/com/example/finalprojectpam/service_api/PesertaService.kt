@@ -1,7 +1,6 @@
 package com.example.finalprojectpam.service_api
 
 import com.example.finalprojectpam.model.AllPesertaResponse
-import com.example.finalprojectpam.model.Event
 import com.example.finalprojectpam.model.Peserta
 import com.example.finalprojectpam.model.PesertaDetailResponse
 import retrofit2.Response

@@ -1,9 +1,6 @@
 package com.example.finalprojectpam.service_api
 
-import com.example.finalprojectpam.model.AllEventResponse
 import com.example.finalprojectpam.model.AllTiketResponse
-import com.example.finalprojectpam.model.Event
-import com.example.finalprojectpam.model.EventDetailResponse
 import com.example.finalprojectpam.model.Tiket
 import com.example.finalprojectpam.model.TiketDetailResponse
 import retrofit2.Response
@@ -37,5 +34,5 @@ interface TiketService {
 
     @DELETE("tiket/{id_tiket}")
     suspend fun deleteTiket(@Path("id_tiket") id_tiket: Int): Response<Void>
-
 }
+
