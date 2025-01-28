@@ -1,6 +1,7 @@
 package com.example.finalprojectpam.di
 
 
+import android.util.Log
 import com.example.finalprojectpam.repository.EventRepository
 import com.example.finalprojectpam.repository.NetworkEventRepository
 import com.example.finalprojectpam.repository.NetworkPesertaRepository
@@ -16,6 +17,7 @@ import com.example.finalprojectpam.service_api.TransaksiService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 
 interface AppContainer{
@@ -31,6 +33,11 @@ class AppContainerEvent : AppContainer{
     private val retrofit: Retrofit = Retrofit.Builder()
         .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
         .baseUrl(baseUrl)
+        .client(OkHttpClient.Builder().addInterceptor { chain ->
+            val request = chain.request()
+            Log.d("RetrofitRequest", "URL: ${request.url}")
+            chain.proceed(request)
+        }.build())
         .build()
 
     private val eventService: EventService by lazy {

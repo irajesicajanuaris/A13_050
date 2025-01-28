@@ -1,3 +1,4 @@
+
 package com.example.finalprojectpam.ui.view.transaksi
 
 import androidx.compose.foundation.layout.Arrangement
@@ -54,7 +55,7 @@ fun DetailTransaksiScreen(
     viewModel: DetailTransaksiViewModel = viewModel(factory = PenyediaViewModel.Factory),
     idTransaksi: Int,
 
-) {
+    ) {
     val transaksi = viewModel.TransaksiuiState.detailTransaksiUiEvent
 
     LaunchedEffect(idTransaksi) {

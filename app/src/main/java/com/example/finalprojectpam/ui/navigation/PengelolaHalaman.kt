@@ -56,8 +56,8 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController(),
             MainHomeScreen(
                 navigateToEventScreen = { navController.navigate(DestinasiHomeEvent.route) },
                 navigateToPesertaScreen = { navController.navigate(DestinasiHomePeserta.route) },
-               navigateToTiketScreen = { navController.navigate(DestinasiHomeTiket.route) },
-               navigateToTransaksiScreen = { navController.navigate(DestinasiHomeTransaksi.route) }
+                navigateToTiketScreen = { navController.navigate(DestinasiHomeTiket.route) },
+                navigateToTransaksiScreen = { navController.navigate(DestinasiHomeTransaksi.route) }
             )
         }
         composable(DestinasiHomeEvent.route) {

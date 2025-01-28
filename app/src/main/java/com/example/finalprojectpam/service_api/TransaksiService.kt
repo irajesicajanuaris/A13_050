@@ -25,7 +25,6 @@ interface TransaksiService {
 
     @GET("transaksi")
     suspend fun getAllTransaksi(): AllTransaksiResponse
-
     @GET("transaksi/{id_transaksi}")
     suspend fun getTransaksibyidTransaksi(@Path("id_transaksi") id_transaksi: Int): TransaksiDetailResponse
 

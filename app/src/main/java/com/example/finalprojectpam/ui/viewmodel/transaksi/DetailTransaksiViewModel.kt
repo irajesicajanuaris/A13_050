@@ -14,8 +14,6 @@ import retrofit2.HttpException
 
 class DetailTransaksiViewModel(
     private val trsksiRepository: TransaksiRepository,
-    private val evntRepository: EventRepository,
-    private val psrtRepository: PesertaRepository
 ) : ViewModel() {
 
     var TransaksiuiState by mutableStateOf(DetailTransaksiUiState())
@@ -25,21 +23,17 @@ class DetailTransaksiViewModel(
         viewModelScope.launch {
             TransaksiuiState = DetailTransaksiUiState(isLoading = true)
             try {
+
                 val transaksi = trsksiRepository.getTransaksibyidTransaksi(idTransaksi)
-                val event = evntRepository.getEventbyidEvent(transaksi.id_tiket)
-                val peserta = psrtRepository.getPesertabyidPeserta(transaksi.id_tiket)
 
                 TransaksiuiState = DetailTransaksiUiState(
                     detailTransaksiUiEvent = transaksi.toDetailTransaksiUiEvent(),
-                    eventName = event.nama_event,
-                    pesertaName = peserta.nama_peserta,
                     tanggalTransaksi = transaksi.tanggal_transaksi
                 )
             } catch (e: HttpException) {
                 e.printStackTrace()
                 TransaksiuiState = DetailTransaksiUiState(
                     isError = true,
-                    errorMessage = "HTTP Error: ${e.code()} ${e.message()}"
                 )
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -48,11 +42,9 @@ class DetailTransaksiViewModel(
                     errorMessage = "Failed to fetch details: ${e.message}"
                 )
             }
-
-
-
         }
     }
+
 
 
     data class DetailTransaksiUiState(
