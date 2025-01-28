@@ -45,6 +45,13 @@ import com.example.finalprojectpam.ui.navigation.DestinasiNavigasi
 import com.example.finalprojectpam.ui.viewmodel.PenyediaViewModel
 import com.example.finalprojectpam.ui.viewmodel.tiket.HomeTiketUiState
 import com.example.finalprojectpam.ui.viewmodel.tiket.HomeTiketViewModel
+import androidx.compose.material3.*
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.Color
+import androidx.navigation.compose.rememberNavController
+import com.example.finalprojectpam.ui.costumewidget.BottomAppBarDefaults
 
 object DestinasiHomeTiket : DestinasiNavigasi {
     override val route = "home_tiket"
@@ -56,6 +63,10 @@ fun HomeTiketScreen(
     navigateToItemEntryTiket:() -> Unit,
     modifier: Modifier = Modifier,
     ondetailClick: (Int) -> Unit = {},
+    onEventClick: () -> Unit,
+    onPesertaClick: () -> Unit,
+    onTiketClick: () -> Unit,
+    onTransaksiClick: () -> Unit,
     viewModel: HomeTiketViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ){
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -64,11 +75,20 @@ fun HomeTiketScreen(
         topBar = {
             CostumeTopAppBar(
                 title = DestinasiHomeTiket.titleRes,
-                canNavigateBack = false,
+                canNavigateBack = true,
                 scrollBehavior = scrollBehavior,
                 onRefresh = {
                     viewModel.getTkt()
                 }
+            )
+        },
+        bottomBar = {
+            BottomAppBarDefaults(
+                navController = rememberNavController(),
+                onEventClick = onEventClick,
+                onPesertaClick = onPesertaClick,
+                onTiketClick = onTiketClick,
+                onTransaksiClick = onTransaksiClick
             )
         },
         floatingActionButton = {
@@ -201,13 +221,20 @@ fun TktCard(
     peserta: Peserta,
     modifier: Modifier = Modifier,
     ondeleteClick: (Tiket) -> Unit = {},
-    ondetailClick: (Int) -> Unit
+    ondetailClick: (Int) -> Unit,
 ) {
+    val kapasitasTersedia = tiket.kapasitas_tiket.toDouble()
+    val backgroundColor = when {
+        kapasitasTersedia > 0.5 -> Color(0xFFB2FF59)
+        kapasitasTersedia in 0.01..0.5 -> Color(0xFFFFF176)
+        else -> Color(0xFFEF5350)
+    }
     Card(
         onClick = { ondetailClick(tiket.id_tiket) },
         modifier = modifier,
         shape = MaterialTheme.shapes.medium,
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = backgroundColor)
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -249,6 +276,21 @@ fun TktCard(
                     )
                 }
             }
+
+            if (kapasitasTersedia <= 0) {
+                Text(
+                    text = "Sold Out",
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    ),
+                    modifier = Modifier.align(Alignment.End)
+                )
+
+            }
         }
     }
 }
+
+
+

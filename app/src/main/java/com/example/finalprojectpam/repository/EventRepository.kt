@@ -11,6 +11,7 @@ interface EventRepository {
     suspend fun updateEvent(id_event: Int, event: Event)
     suspend fun deleteEvent(id_event: Int)
     suspend fun getEventbyidEvent(id_event: Int): Event
+    suspend fun getAllEvents(): List<Event>
 }
 
 class NetworkEventRepository(
@@ -46,5 +47,9 @@ class NetworkEventRepository(
 
     override suspend fun getEventbyidEvent(id_event: Int): Event {
         return eventApiService.getEventbyidEvent(id_event).data
+    }
+
+    override suspend fun getAllEvents(): List<Event> {
+        return eventApiService.getAllEvent().data
     }
 }

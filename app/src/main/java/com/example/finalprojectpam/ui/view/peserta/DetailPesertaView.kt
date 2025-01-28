@@ -27,6 +27,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.rememberNavController
+import com.example.finalprojectpam.ui.costumewidget.BottomAppBarDefaults
 import com.example.finalprojectpam.ui.navigation.DestinasiNavigasi
 import com.example.finalprojectpam.ui.viewmodel.PenyediaViewModel
 import com.example.finalprojectpam.ui.viewmodel.Peserta.DetailPesertaViewModel
@@ -44,6 +46,10 @@ fun DetailPesertaScreen(
     onEditClick: (Int) -> Unit = { },
     onBackClick: () -> Unit = { },
     modifier: Modifier = Modifier,
+    onEventClick: () -> Unit,
+    onPesertaClick: () -> Unit,
+    onTiketClick: () -> Unit,
+    onTransaksiClick: () -> Unit,
     viewModel: DetailPesertaViewModel = viewModel(factory = PenyediaViewModel.Factory),
     idPeserta: Int
 ) {
@@ -69,6 +75,15 @@ fun DetailPesertaScreen(
                     }
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors()
+            )
+        },
+        bottomBar = {
+            BottomAppBarDefaults(
+                navController = rememberNavController(),
+                onEventClick = onEventClick,
+                onPesertaClick = onPesertaClick,
+                onTiketClick = onTiketClick,
+                onTransaksiClick = onTransaksiClick
             )
         },
         floatingActionButton = {

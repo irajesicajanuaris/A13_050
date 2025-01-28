@@ -27,7 +27,6 @@ class DetailEventViewModel(private val evntRepository: EventRepository) : ViewMo
             }
         }
     }
-
 }
 
 data class DetailEventUiState(

@@ -31,6 +31,7 @@ class InsertPesertaViewModel (private val psrt: PesertaRepository): ViewModel(){
 
 data class InsertPesertaUiState(
     val insertPesertaUiEvent: InsertPesertaUiEvent = InsertPesertaUiEvent()
+    
 )
 
 data class InsertPesertaUiEvent(

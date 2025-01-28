@@ -1,15 +1,14 @@
 package com.example.finalprojectpam.model
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Tiket (
+data class Tiket(
     val id_tiket: Int,
     val id_event: Int,
     val id_peserta: Int,
     val kapasitas_tiket: String,
-    val harga_tiket: String
+    val harga_tiket: Int
 )
 
 @Serializable

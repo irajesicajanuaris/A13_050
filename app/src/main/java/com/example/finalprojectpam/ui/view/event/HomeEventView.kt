@@ -18,6 +18,7 @@ package com.example.finalprojectpam.ui.view.event
     import androidx.compose.material.icons.Icons
     import androidx.compose.material.icons.filled.Add
     import androidx.compose.material.icons.filled.Delete
+    import androidx.compose.material3.BottomAppBarDefaults
     import androidx.compose.material3.Button
     import androidx.compose.material3.Card
     import androidx.compose.material3.CardDefaults
@@ -37,8 +38,10 @@ package com.example.finalprojectpam.ui.view.event
     import androidx.compose.ui.res.stringResource
     import androidx.compose.ui.unit.dp
     import androidx.lifecycle.viewmodel.compose.viewModel
+    import androidx.navigation.compose.rememberNavController
     import com.example.finalprojectpam.R
     import com.example.finalprojectpam.model.Event
+    import com.example.finalprojectpam.ui.costumewidget.BottomAppBarDefaults
     import com.example.finalprojectpam.ui.costumewidget.CostumeTopAppBar
     import com.example.finalprojectpam.ui.navigation.DestinasiNavigasi
     import com.example.finalprojectpam.ui.viewmodel.PenyediaViewModel
@@ -50,12 +53,17 @@ package com.example.finalprojectpam.ui.view.event
         override val route = "home_event"
         override val titleRes = "Home Event"
     }
+
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun HomeEventScreen(
         navigateToItemEntry:() -> Unit,
         modifier: Modifier = Modifier,
         ondetailClick: (Int) -> Unit = {},
+        onEventClick: () -> Unit,
+        onPesertaClick: () -> Unit,
+        onTiketClick: () -> Unit,
+        onTransaksiClick: () -> Unit,
         viewModel: HomeEventViewModel = viewModel(factory = PenyediaViewModel.Factory)
     ){
         val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -64,11 +72,20 @@ package com.example.finalprojectpam.ui.view.event
             topBar = {
                 CostumeTopAppBar(
                     title = DestinasiHomeEvent.titleRes,
-                    canNavigateBack = false,
+                    canNavigateBack = true,
                     scrollBehavior = scrollBehavior,
                     onRefresh = {
                         viewModel.getEvnt()
                     }
+                )
+            },
+            bottomBar = {
+                BottomAppBarDefaults(
+                    navController = rememberNavController(),
+                    onEventClick = onEventClick,
+                    onPesertaClick = onPesertaClick,
+                    onTiketClick = onTiketClick,
+                    onTransaksiClick = onTransaksiClick
                 )
             },
             floatingActionButton = {
@@ -94,10 +111,7 @@ package com.example.finalprojectpam.ui.view.event
                 }
             )
         }
-
-
     }
-
 
     @Composable
     fun HomeEventStatus(

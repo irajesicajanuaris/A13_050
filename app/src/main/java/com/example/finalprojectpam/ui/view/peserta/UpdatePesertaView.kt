@@ -10,6 +10,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.rememberNavController
+import com.example.finalprojectpam.ui.costumewidget.BottomAppBarDefaults
 import com.example.finalprojectpam.ui.costumewidget.CostumeTopAppBar
 import com.example.finalprojectpam.ui.navigation.DestinasiNavigasi
 import com.example.finalprojectpam.ui.view.event.EntryBodyEvent
@@ -35,6 +37,10 @@ fun UpdatePesertaScreen(
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
     onNavigate:()-> Unit,
+    onEventClick: () -> Unit,
+    onPesertaClick: () -> Unit,
+    onTiketClick: () -> Unit,
+    onTransaksiClick: () -> Unit,
     viewModel: UpdatePesertaViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ){
     val coroutineScope = rememberCoroutineScope()
@@ -47,7 +53,16 @@ fun UpdatePesertaScreen(
                 title = DestinasiUpdatePeserta.titleRes,
                 canNavigateBack = true,
                 scrollBehavior = scrollBehavior,
-                navigateUp = onBack,
+                onBackClick = onBack
+            )
+        },
+        bottomBar = {
+            BottomAppBarDefaults(
+                navController = rememberNavController(),
+                onEventClick = onEventClick,
+                onPesertaClick = onPesertaClick,
+                onTiketClick = onTiketClick,
+                onTransaksiClick = onTransaksiClick
             )
         }
     ){padding ->

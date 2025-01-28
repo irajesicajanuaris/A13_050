@@ -6,8 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalprojectpam.model.Tiket
-import com.example.finalprojectpam.repository.EventRepository
-import com.example.finalprojectpam.repository.PesertaRepository
 import com.example.finalprojectpam.repository.TiketRepository
 import kotlinx.coroutines.launch
 
@@ -46,7 +44,7 @@ fun Tiket.toDetailTiketUiEvent(): InsertTiketUiEvent {
         id_tiket = id_tiket,
         id_event = id_event,
         id_peserta = id_peserta,
-        kapasitas_tiket = kapasitas_tiket,
+        kapasitas_tiket = kapasitas_tiket.toString(),
         harga_tiket = harga_tiket
     )
 }

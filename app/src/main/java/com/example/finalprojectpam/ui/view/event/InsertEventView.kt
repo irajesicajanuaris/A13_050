@@ -20,6 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.rememberNavController
+import com.example.finalprojectpam.ui.costumewidget.BottomAppBarDefaults
 import com.example.finalprojectpam.ui.costumewidget.CostumeTopAppBar
 import com.example.finalprojectpam.ui.navigation.DestinasiNavigasi
 import com.example.finalprojectpam.ui.viewmodel.PenyediaViewModel
@@ -38,6 +40,10 @@ object DestinasiEntryEvent : DestinasiNavigasi {
 fun EntryEventScreen(
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
+    onEventClick: () -> Unit,
+    onPesertaClick: () -> Unit,
+    onTiketClick: () -> Unit,
+    onTransaksiClick: () -> Unit,
     viewModel: InsertEventViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ){
     val coroutineScope = rememberCoroutineScope()
@@ -48,8 +54,17 @@ fun EntryEventScreen(
             CostumeTopAppBar(
                 title = DestinasiEntryEvent.titleRes,
                 canNavigateBack = true,
+                onBackClick = navigateBack,
                 scrollBehavior = scrollBehavior,
-                navigateUp = navigateBack
+            )
+        },
+        bottomBar = {
+            BottomAppBarDefaults(
+                navController = rememberNavController(),
+                onEventClick = onEventClick,
+                onPesertaClick = onPesertaClick,
+                onTiketClick = onTiketClick,
+                onTransaksiClick = onTransaksiClick
             )
         }
     ){

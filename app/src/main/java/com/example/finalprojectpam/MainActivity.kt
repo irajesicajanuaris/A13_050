@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             FinalProjectPAMTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    PengelolaHalaman(
+                    EventApp(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }

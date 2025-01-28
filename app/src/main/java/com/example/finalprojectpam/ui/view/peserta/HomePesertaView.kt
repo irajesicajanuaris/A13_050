@@ -37,9 +37,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.rememberNavController
 import com.example.finalprojectpam.R
 import com.example.finalprojectpam.model.Event
 import com.example.finalprojectpam.model.Peserta
+import com.example.finalprojectpam.ui.costumewidget.BottomAppBarDefaults
 import com.example.finalprojectpam.ui.costumewidget.CostumeTopAppBar
 import com.example.finalprojectpam.ui.navigation.DestinasiNavigasi
 import com.example.finalprojectpam.ui.viewmodel.PenyediaViewModel
@@ -57,6 +59,10 @@ fun HomePesertaScreen(
     navigateToItemEntryPeserta:() -> Unit,
     modifier: Modifier = Modifier,
     ondetailClick: (Int) -> Unit = {},
+    onEventClick: () -> Unit,
+    onPesertaClick: () -> Unit,
+    onTiketClick: () -> Unit,
+    onTransaksiClick: () -> Unit,
     viewModel: HomePesertaViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ){
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -70,6 +76,15 @@ fun HomePesertaScreen(
                 onRefresh = {
                     viewModel.getPsrt()
                 }
+            )
+        },
+        bottomBar = {
+            BottomAppBarDefaults(
+                navController = rememberNavController(),
+                onEventClick = onEventClick,
+                onPesertaClick = onPesertaClick,
+                onTiketClick = onTiketClick,
+                onTransaksiClick = onTransaksiClick
             )
         },
         floatingActionButton = {
